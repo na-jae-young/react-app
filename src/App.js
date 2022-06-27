@@ -11,7 +11,12 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state={
-      subject:{title:'web', sub:'world wide web!'}
+      subject:{title:'web', sub:'world wide web!'},
+      content:[
+        {id:1,title:'html', desc:'html is ...'},
+        {id:2,title:'css', desc:'css is ....'},
+        {id:3, title:'js',desc:'js is ....'}
+      ]
     } //state 초기화
 
   }
