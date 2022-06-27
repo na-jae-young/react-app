@@ -11,25 +11,36 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state={
+      mode:'welcome',
       subject:{title:'web', sub:'world wide web!'},
-      content:[
+      welcome:{title:'Welcome', desc:'hello react'},
+      contents:[
         {id:1,title:'html', desc:'html is ...'},
         {id:2,title:'css', desc:'css is ....'},
         {id:3, title:'js',desc:'js is ....'}
       ]
     } //state 초기화
-
+      //stte가 바뀌면 render()함수가 모두 다시 실행된다. 
   }
   render(){
+    let _title , _desc = null;
+    if(this.state.mode === 'welcome'){
+      _title = this.state.welcome.title;
+      _desc = this.state.welcome.desc;
+    }else if(this.state.mode === 'read'){
+      _title = this.state.contents[0].title;
+      _desc = this.state.contents[0].desc;
+    }
+
     return(
       <div className="App">
         HELLO WORLD
         <Subject 
           title={this.state.subject.title} 
-          sub={this.state.subject.sub} >
+          sub={this.state.subject.sub}>
         </Subject>
-        <Toc></Toc>
-        <Content title="html" desc="html is ....."></Content>
+        <Toc data ={this.state.contents}></Toc>
+        <Content title={_title} desc={_desc}></Content>
       </div>
     );
   }
