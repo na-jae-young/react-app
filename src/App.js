@@ -2,7 +2,8 @@
 
 import React, {Component}from 'react';
 import './App.css';
-import Content from './conponent/Content';
+import ReadContent from './conponent/ReadContent';
+import CreateContent from './conponent/CreateContent';
 import Toc from './conponent/Toc';
 import Subject from './conponent/Subject';
 import Control from './conponent/Control';
@@ -24,10 +25,11 @@ class App extends Component{
       //stte가 바뀌면 render()함수가 모두 다시 실행된다. 
   }
   render(){
-    let _title , _desc = null;
+    let _title , _desc, _article = null;
     if(this.state.mode === 'welcome'){
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
+      _article = <ReadContent title={_title} desc={_desc}></ReadContent>
     }else if(this.state.mode === 'read'){
       let i = 0;
       while(i<this.state.contents.length){
@@ -39,8 +41,11 @@ class App extends Component{
         }
         i = i+1
       }
+      _article = <ReadContent title={_title} desc={_desc}></ReadContent>
+    }else if ( this.state.mode === "create"){
+      _article = <CreateContent></CreateContent>
     }
-
+ 
     return(
       <div className="App">
         HELLO WORLD
@@ -66,7 +71,7 @@ class App extends Component{
             mode:_mode
           })
         }.bind(this)}></Control>
-        <Content title={_title} desc={_desc}></Content>
+        {_article}
       </div>
     );
   }
