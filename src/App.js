@@ -37,7 +37,10 @@ class App extends Component{
         HELLO WORLD
         <Subject 
           title={this.state.subject.title} 
-          sub={this.state.subject.sub}>
+          sub={this.state.subject.sub}
+          onChangePage={function(){
+            alert('hihihihi')
+          }.bind(this)}>
         </Subject>
         <Toc data ={this.state.contents}></Toc>
         <Content title={_title} desc={_desc}></Content>

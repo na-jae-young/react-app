@@ -10,6 +10,7 @@ class Subject extends Component{
             //alert('hi')
             e.preventDefault(); // 이벤트 객체 e가 실행될때 reload 안되게 막아줌 
             //이벤트 객체 e가 실행될때 기본적으로 작동하던것들을 작동하지 않게 막아주는 함수
+            this.props.onChangePage();
             this.setState({
                 mode:'welcome'
             }); //state 값 바꾸기 
