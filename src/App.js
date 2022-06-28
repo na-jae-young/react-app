@@ -5,7 +5,7 @@ import './App.css';
 import Content from './conponent/Content';
 import Toc from './conponent/Toc';
 import Subject from './conponent/Subject';
-
+import Control from './conponent/Control';
 
 class App extends Component{
   constructor(props){
@@ -60,8 +60,12 @@ class App extends Component{
             this.setState({mode:'read'})
             this.setState({selected_id:Number(id)})
           }.bind(this)}>
-
         </Toc>
+        <Control onChangeMode={function(_mode){
+          this.setState({
+            mode:_mode
+          })
+        }.bind(this)}></Control>
         <Content title={_title} desc={_desc}></Content>
       </div>
     );
