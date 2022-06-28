@@ -11,7 +11,7 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state={
-      mode:'welcome',
+      mode:'read',
       subject:{title:'web', sub:'world wide web!'},
       welcome:{title:'Welcome', desc:'hello react'},
       contents:[
