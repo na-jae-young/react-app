@@ -1,7 +1,15 @@
 import React, {Component}from 'react';
 
 class Toc extends Component{
+
+    shouldComponentUpdate(newProps, newState){
+      if(this.props.data === newProps.data){
+        return false
+      }
+      return true
+    }// state 값의 변화가 있을때만 render()함수가 실행되도록 
     render(){
+        console.log('start')
         const data = this.props.data;
         let lists=[];
         let i = 0;
