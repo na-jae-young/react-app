@@ -11,6 +11,7 @@ import Control from './conponent/Control';
 class App extends Component{
   constructor(props){
     super(props);
+    this.max_content_id = 3;
     this.state={
       mode:'read',
       selected_id:1,
@@ -24,6 +25,7 @@ class App extends Component{
     } //state 초기화
       //stte가 바뀌면 render()함수가 모두 다시 실행된다. 
   }
+
   render(){
     let _title , _desc, _article = null;
     if(this.state.mode === 'welcome'){
@@ -43,7 +45,19 @@ class App extends Component{
       }
       _article = <ReadContent title={_title} desc={_desc}></ReadContent>
     }else if ( this.state.mode === "create"){
-      _article = <CreateContent></CreateContent>
+      _article = <CreateContent onSubmit={function(_title,_desc){
+        
+        this.max_content_id = this.max_content_id + 1;
+        /*
+        this.state.contents.push(
+          {id:this.max_content_id, title:_title , desc:_desc}
+        );
+        this.setState({contents:this.state.contents})
+          //push 로 값 바꾸고 setState()로 state 변경 */
+        const _content = this.state.contents.concat(
+          {id:this.max_content_id, title:_title , desc:_desc})
+        this.setState({contents:_content})
+      }.bind(this)}></CreateContent>
     }
  
     return(

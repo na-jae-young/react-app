@@ -1,6 +1,6 @@
 import React, {Component}from 'react';
 
-class ControlContent  extends Component{
+class CreateContent  extends Component{
     render(){
       return(
         <article>
@@ -9,6 +9,10 @@ class ControlContent  extends Component{
                 onSubmit={function(e){
                     e.preventDefault()
                     alert('submit!!!!')
+                    this.props.onSubmit(
+                      e.target.title.value,
+                      e.target.desc.value
+                    )
                 }.bind(this)}>
                 <p><input type="text" name="title" placeholder='title'></input></p>
                 <p><input type="textarea" name="desc" placeholder='description'></input></p>
@@ -19,4 +23,4 @@ class ControlContent  extends Component{
     }
   }
 
-  export default ControlContent;
+  export default CreateContent;
