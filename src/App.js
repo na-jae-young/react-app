@@ -77,7 +77,7 @@ class App extends Component{
             }
             i= i+1
           }
-        this.setState({contents:_contents})
+        this.setState({contents:_contents,mode:'read'})
       }.bind(this)}></UpdateContent>
     }
     return _article
@@ -106,9 +106,27 @@ class App extends Component{
           }.bind(this)}>
         </Toc>
         <Control onChangeMode={function(_mode){
-          this.setState({
-            mode:_mode
-          })
+          if(_mode === 'delete'){
+            if(window.confirm('really?')){
+              let _contents= Array.from(this.state.contents);
+              let i = 0
+              while(i < _contents.length){
+                console.log(_contents[i].id,this.state.selected_id)
+                if(_contents[i].id === this.state.selected_id){
+                  _contents.splice(i,1)
+                  console.log(_contents)
+                  break
+                }
+                i= i+1
+              }
+              this.setState({contents:_contents,mode:'welcome'})
+              alert('deleted')
+            }
+          }else{
+            this.setState({
+              mode:_mode
+            })
+          }
         }.bind(this)}></Control>
         {this.getContent()}
       </div>
