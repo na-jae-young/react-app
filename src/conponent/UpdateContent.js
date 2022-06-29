@@ -4,6 +4,7 @@ class UpdateContent  extends Component{
     constructor(props){
         super(props);
         this.state = {
+            id:this.props.data.id,
             title:this.props.data.title,
             desc:this.props.data.desc
         } // props는 readonly이기 때문에 수정이 불가하므로 conponent내부에 state화 시켜준후 사용한다.
@@ -22,12 +23,13 @@ class UpdateContent  extends Component{
             <form action='/Update_process' method='post'
                 onSubmit={function(e){
                     e.preventDefault()
-                    alert('submit!!!!')
                     this.props.onSubmit(
-                      e.target.title.value,
-                      e.target.desc.value
+                        this.state.id,
+                        this.state.title,
+                        this.state.desc
                     )
                 }.bind(this)}>
+                <input type="hidden" name="id" value={this.state.id}></input>
                 <p>
                     <input 
                         type="text" 
