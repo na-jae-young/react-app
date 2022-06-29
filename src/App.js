@@ -7,6 +7,7 @@ import CreateContent from './conponent/CreateContent';
 import Toc from './conponent/Toc';
 import Subject from './conponent/Subject';
 import Control from './conponent/Control';
+import UpdateContent from './conponent/UpdateContent';
 
 class App extends Component{
   constructor(props){
@@ -26,25 +27,29 @@ class App extends Component{
       //stte가 바뀌면 render()함수가 모두 다시 실행된다. 
   }
 
-  render(){
+  getReadContent(){
+    let i = 0;
+    while(i<this.state.contents.length){
+      let data = this.state.contents[i];
+      if(data.id === this.state.selected_id){
+        return data
+      }
+      i = i+1
+    }
+  }
+
+  getContent(){
     let _title , _desc, _article = null;
     if(this.state.mode === 'welcome'){
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
       _article = <ReadContent title={_title} desc={_desc}></ReadContent>
-    }else if(this.state.mode === 'read'){
-      let i = 0;
-      while(i<this.state.contents.length){
-        let data = this.state.contents[i];
-        if(data.id === this.state.selected_id){
-          _title = data.title
-          _desc = data.desc
-          break
-        }
-        i = i+1
-      }
-      _article = <ReadContent title={_title} desc={_desc}></ReadContent>
-    }else if ( this.state.mode === "create"){
+    }
+    else if(this.state.mode === 'read'){
+      const readcontent = this.getReadContent()
+      _article = <ReadContent title={readcontent.title} desc={readcontent.desc}></ReadContent>
+    }
+    else if ( this.state.mode === "create"){
       _article = <CreateContent onSubmit={function(_title,_desc){
         
         this.max_content_id = this.max_content_id + 1;
@@ -59,7 +64,19 @@ class App extends Component{
         this.setState({contents:_content})
       }.bind(this)}></CreateContent>
     }
+    else if ( this.state.mode === "update"){
+      const _content = this.getReadContent()
+      _article = <UpdateContent data= {_content} onSubmit={function(_title,_desc){
+        const _content = this.state.contents.concat(
+          {id:this.max_content_id, title:_title , desc:_desc})
+        this.setState({contents:_content})
+      }.bind(this)}></UpdateContent>
+    }
+    return _article
  
+  }
+
+  render(){
     return(
       <div className="App">
         HELLO WORLD
@@ -85,7 +102,7 @@ class App extends Component{
             mode:_mode
           })
         }.bind(this)}></Control>
-        {_article}
+        {this.getContent()}
       </div>
     );
   }
