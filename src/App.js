@@ -111,10 +111,8 @@ class App extends Component{
               let _contents= Array.from(this.state.contents);
               let i = 0
               while(i < _contents.length){
-                console.log(_contents[i].id,this.state.selected_id)
                 if(_contents[i].id === this.state.selected_id){
                   _contents.splice(i,1)
-                  console.log(_contents)
                   break
                 }
                 i= i+1

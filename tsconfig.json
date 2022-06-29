@@ -1,0 +1,18 @@
+{
+    //타입스크립트의 위치 지정  , 자바스크립트로 컴파일해줄 ts 의 모든 디렉토리 
+    "include": ["src"],
+
+
+    "compilerOptions": {
+        "outDir": "build",//자바스트립트 파일이 생성될 디렉토리   build 폴더 , package.json의 script에 build 추가 
+        "target": "ES6",//어떤 버전의 자바스크립트로 컴파일할지 정한다.
+        "lib": ["DOM","ES6"] ,//사용 환경// 라이브러리 정의파일( 메소드, 타입 ) es6 -서버버전 , dom - 브라우저 환경 (document)
+        //API들을 타입스크립트가 알고있게 해줌 , 윈도우+컨트롤키  누른상태로 메소드 클릭시 정의파일 볼수있음 
+        "strict": true,// 타입스크립트가 문법 보호해줌 
+        "allowJs": true, // 타입스크립트 안에 자바스크립트를 더하는것을 허락함 
+        "esModuleInterop": true,
+    },
+
+
+
+}
